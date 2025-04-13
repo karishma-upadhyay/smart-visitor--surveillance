@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Verify Your ID</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #f0fdf4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 260px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #28a745;
+      outline: none;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #28a745, #218838);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #218838, #1e7e34);
+      box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+      transform: scale(1.05);
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Verify Your ID</h2>
+    <form id="idForm" action="/verify_id" method="POST">
+      <input type="text" name="user_id" placeholder="Enter your ID" required><br>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("idForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // prevent immediate form submit
+
+      // Show popup
+      alert("Your ID has been verified successfully!");
+
+      // Submit the form after the alert
+      this.submit();
+    });
+  </script>
+</body>
+</html>

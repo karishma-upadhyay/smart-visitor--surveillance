@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New User - Smart Visitor Surveillance</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      width: 60%;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.01);
+    }
+
+    h1 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #e8f0fe;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+    }
+
+    .stat-box h3 {
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .stat-box p {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Register New Visitor</h1>
+
+    <form id="visitor-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter full name" />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter email" />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter phone number" />
+
+      <label for="idType">ID Type</label>
+      <select id="idType">
+        <option value="">Select ID Type</option>
+        <option value="Aadhar">Aadhar</option>
+        <option value="PAN">PAN</option>
+        <option value="Voter ID">Voter ID</option>
+      </select>
+
+      <label for="idNumber">ID Number</label>
+      <input type="text" id="idNumber" placeholder="Enter ID number" />
+
+      <label for="location">Location</label>
+      <select id="location">
+        <option value="">Select</option>
+        <option value="Main Gate">Main Gate</option>
+        <option value="Reception">Reception</option>
+        <option value="Meeting Room">Meeting Room</option>
+      </select>
+
+      <label for="purpose">Purpose of Visit</label>
+      <textarea id="purpose" placeholder="Meeting, Delivery, etc."></textarea>
+
+      <button type="button" onclick="addVisitor()">Add Visitor</button>
+      <button type="button" id="addFaceBtn">Add Face</button>
+    </form>
+
+    <div class="stats-container">
+      <div class="stat-box">
+        <h3>Total Visitors</h3>
+        <p id="total-visitors">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Active Visitors</h3>
+        <p id="active-visitors">0</p>
+      </div>
+      <div class="stat-box">
+        <h3>Avg. Duration (min)</h3>
+        <p id="avg-duration">0</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let totalVisitors = 0;
+    let activeVisitors = 0;
+    let avgDuration = 0;
+
+    function addVisitor() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const location = document.getElementById("location").value;
+      const purpose = document.getElementById("purpose").value.trim();
+      const idType = document.getElementById("idType").value;
+      const idNumber = document.getElementById("idNumber").value.trim();
+
+      if (!name || !email || !phone || !location || !purpose || !idType || !idNumber) {
+        alert("⚠️ Please fill in all the fields before adding a visitor.");
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^[6-9]\d{9}$/;
+      const idNumberPattern = /^[A-Z0-9]{4,20}$/;
+
+      if (!emailPattern.test(email)) {
+        alert("❌ Please enter a valid email address.");
+        return;
+      }
+
+      if (!phonePattern.test(phone)) {
+        alert("❌ Please enter a valid 10-digit phone number.");
+        return;
+      }
+
+      if (!idNumberPattern.test(idNumber)) {
+        alert("❌ Please enter a valid ID number.");
+        return;
+      }
+
+      totalVisitors++;
+      activeVisitors++;
+      avgDuration = Math.floor(Math.random() * 60) + 20;
+
+      document.getElementById("total-visitors").innerText = totalVisitors;
+      document.getElementById("active-visitors").innerText = activeVisitors;
+      document.getElementById("avg-duration").innerText = avgDuration;
+
+      alert("✅ Visitor Added Successfully!");
+      document.getElementById("visitor-form").reset();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("addFaceBtn").addEventListener("click", () => {
+        fetch('http://localhost:5000/run_face_recognition')
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message);
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to start face recognition.");
+          });
+      });
+    });
+  </script>
+</body>
+</html>

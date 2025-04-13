@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition</title>
+    <!-- Importing a clean, modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8e8f4, #e3d5f9); /* soft pink to purple */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffffdd;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 16px;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #732d91;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Visitor Surveillance</h1>
+        <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+        <form action="/verify_face" method="post">
+            <button type="submit">Verify Face</button>
+        </form>
+    </div>
+</body>
+</html>

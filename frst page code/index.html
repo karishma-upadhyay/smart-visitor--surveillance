@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Visitor Surveillance System</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:900&display=swap" rel="stylesheet">
+  <style>
+    /* Background Scroll Animation */
+    @keyframes scrollBg {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-330px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-bg {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      padding-bottom: 330px;
+      background-color: #0a0f1f;
+      background-image: url('https://images.unsplash.com/photo-1626330142090-cb8c3f859435?auto=format&fit=crop&w=1440&q=80');
+      background-size: cover;
+      background-repeat: repeat;
+      animation: scrollBg 35s linear infinite;
+      z-index: -1;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Raleway', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .content-wrapper {
+      animation: fadeIn 1.2s ease-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #dcdfff;
+      font-weight: 500;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 30px;
+      z-index: 1;
+    }
+
+    .main-btn {
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ffffff;
+      color: #2c3e50;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .main-btn:hover {
+      background-color: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    /* Loader Spinner */
+    #loader {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: #0a0f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .button-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .main-btn {
+        width: 80vw;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="scroll-bg"></div>
+
+  <div class="content-wrapper">
+    <!-- Logo -->
+    <img src="https://cdn-icons-png.flaticon.com/512/5586/5586920.png" alt="Logo" class="logo" />
+
+    <h1>Smart Visitor Surveillance System</h1>
+    <div class="subtitle">Face recognition powered visitor tracking</div>
+
+    <div class="button-container">
+      <button class="main-btn" onclick="window.location.href='C:\Users\karis\OneDrive\Desktop\Major Project\code\register.html'">New User</button>
+      <button class="main-btn" onclick="window.location.href='C:\Users\karis\OneDrive\Desktop\Major Project\existing_user\temp\existing.html'">Existing User</button>
+    </div>
+  </div>
+
+</body>
+</html>
